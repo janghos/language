@@ -13,31 +13,19 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-@Mapper
-public interface LanguageMapper {
-	
-	@Insert("INSERT INTO language(name,last_update) VALUES (#{language.name} ,CURRENT_TIMESTAMP())")
-	@Options(useGeneratedKeys=true,keyProperty="id")
-	int insert(@Param("language") Language language);
-	
-	@Select("SELECT * FROM language")//리스트 전체 조회
-	@Results(id="languageMap", value={
-			@Result(property="id",column="language_id")
-			})
-	List<Language >getAll();
-	
-	@Select("Select * FROM language WHERE language_id=#{id}")//개별 조회
-	@ResultMap("languageMap")
-	Language getById(@Param("id") int id);
-	
-	@Delete("DELETE FROM language WHERE language_id = #{id}")
-	@ResultMap("languageMap")
-	int deleteId(@Param("id") int id);
-	
-	@Update("UPDATE language SET name=#{language.name}, last_update=CURRENT_TIMESTAMP() WHERE language_id=#{id}")
-	@ResultMap("languageMap")
-	int update(@Param("id") int id, @Param("language") Language language);
+@Mapper//매퍼 어노테이션
 
+public interface LanguageMapper {
+
+	List<Language> getAll();//전체조회
 	
+	Language getId(@Param("id") int id);//id별 조회
+	
+	int insertTest(@Param("language") Language language);//추가
+	
+	int deleteTest(@Param("id") int id);//삭제
+	
+	int updateTest(@Param("id") int id, @Param("language") Language language);//업데이트
+
 
 }

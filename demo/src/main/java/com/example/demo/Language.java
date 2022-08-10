@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
